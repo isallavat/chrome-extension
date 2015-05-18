@@ -1,0 +1,44 @@
+<!doctype html>
+
+<html lang="en" ng-app="app" ng-csp>
+<head>
+    <meta charset="utf-8">
+    <title>Whotrades</title>
+    <link rel="stylesheet" href="/css/whotrades.css">
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/jquery-2.1.4.min.js"></script>
+    <script src="/js/whotrades.js"></script>
+</head>
+
+<body ng-controller="Options">
+    <div class="options">
+        <h1 class="heading heading_1">Настройки</h1>
+        <h3 class="heading heading_3">Формы</h3>
+
+        <div class="options__row">
+            <div class="options__cell options__cell_w_40">
+                <label class="options__label">Ключ (name)</label>
+            </div>
+            <div class="options__cell options__cell_w_40">
+                <label class="options__label">Значение (value)</label>
+            </div>
+        </div>
+
+        <div class="options__row" data-ng-repeat="item in options.forms">
+            <div class="options__cell options__cell_w_40">
+                <input class="input" type="text" data-ng-model="item.name">
+            </div>
+            <div class="options__cell options__cell_w_40">
+                <input class="input" type="text" data-ng-model="item.value">
+            </div>
+            <div class="options__cell options__cell_w_20">
+                <span class="link link_pseudo options__row_remove" data-ng-click="removeFormField($index)">Удалить</span>
+            </div>
+        </div>
+
+        <p><span class="link link_pseudo" data-ng-click="addFormField()">Добавить поле</span></p>
+
+        <button class="button button_theme_blue options__save" data-ng-click="save()">Сохранить</button>
+    </div>
+</body>
+</html>

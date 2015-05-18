@@ -1,0 +1,25 @@
+<!doctype html>
+
+<html lang="en" ng-app="app" ng-csp>
+<head>
+    <meta charset="utf-8">
+    <title>Whotrades</title>
+    <link rel="stylesheet" href="/css/whotrades.css">
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/jquery-2.1.4.min.js"></script>
+    <script src="/js/whotrades.js"></script>
+</head>
+
+<body ng-controller="Popup" class="body">
+    <div class="popup">
+        <ul class="popup__list">
+            <li class="popup__item" data-ng-click="fillForm()">Заполнение всей формы</li>
+            <li class="popup__item" data-ng-click="fillFormFlement()">Заполнение элемента формы</li>
+        </ul>
+        <hr class="separator">
+        <ul class="popup__list">
+            <li class="popup__item" data-ng-click="getOptions()">Настройки</li>
+        </ul>
+    </div>
+</body>
+</html>
