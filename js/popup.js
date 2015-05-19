@@ -3,14 +3,7 @@ var app = angular.module('app', []);
 chrome.tabs.executeScript({file: '/js/jquery.js'});
 
 
-app.controller('Popup', function ($scope) {
-    chrome.tabs.executeScript({
-        code: 'JSON.stringify(window.location)'
-    }, function (location) {
-        $scope.tabLocation = JSON.parse(location);
-    });
-
-
+app.controller('Popup', function ($scope, $http) {
     // Получение настройки расширения
     $scope.options = localStorage.options ? JSON.parse(localStorage.options) : {};
 
@@ -90,27 +83,19 @@ app.controller('Popup', function ($scope) {
      * @param {number} length
      * @returns {string}
      */
-    $scope.generateText = function (length) {
-        return 'text';
-    };
+    $scope.generateText = function (value) {
+        var xhr = new XMLHttpRequest(),
+            _value = value.split(':'),
+            host = 'https://montanaflynn-lorem-text-generator.p.mashape.com/',
+            response;
 
+        xhr.open('GET', host + _value[0] + '?count=' + _value[1], false);
+        xhr.setRequestHeader('X-Mashape-Key', 'M9cAROt2eNmshJMy3feYN5u2V1YSp1Qa5iMjsnLV0ZYQSfB9rC');
+        xhr.setRequestHeader('Accept', 'application/json');
+        xhr.send();
 
-    /**
-     * Проверка соответсвия домена для формы
-     *
-     * @param {string} sites
-     * @returns {boolean}
-     */
-    $scope.checkSite = function (sites) {
-        var _sites = sites.replace(/\s*/g, '').split(','),
-            res = false;
+        response = JSON.parse(xhr.responseText);
 
-        _sites.forEach(function (item) {
-            if ((new RegExp(item, 'ig')).test($scope.tabLocation.host)) {
-                res = true;
-            }
-        });
-
-        return res;
+        return response.join(' ');
     };
 });

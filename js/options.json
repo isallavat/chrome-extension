@@ -2,11 +2,10 @@
     "forms": [
         {
             "title": "Регистрация",
-            "sites": "whotrades.com, whotrades.net",
             "items": [
                 {
                     "type": "text",
-                    "name": "user['name']",
+                    "name": "user[name]",
                     "value": "Имя"
                 },
                 {
@@ -38,7 +37,6 @@
         },
         {
             "title": "Вход",
-            "sites": "whotrades.com, whotrades.net",
             "items": [
                 {
                     "type": "text",
@@ -54,17 +52,16 @@
         },
         {
             "title": "Блог-пост",
-            "sites": "whotrades.com, whotrades.net",
             "items": [
                 {
                     "type": "randomText",
                     "name": "post[title]",
-                    "value": "30"
+                    "value": "word:5"
                 },
                 {
                     "type": "randomText",
                     "name": "post[text]",
-                    "value": "200"
+                    "value": "paragraph:3"
                 }
             ]
         }

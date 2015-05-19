@@ -8,8 +8,6 @@
 
     "permissions": [
         "tabs",
-        "activeTab",
-        "contextMenus",
         "http://*/*",
         "https://*/*"
     ],

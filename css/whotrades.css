@@ -4,14 +4,9 @@ body {
 }
 
 
-.heading {
-
-}
-
 .heading_1 {
     margin: 0 0 15px;
     font-size: 36px;
-    text-align: center;
 }
 
 .heading_2 {
@@ -58,8 +53,8 @@ body {
 .button {
     display: inline-block;
     vertical-align: middle;
-    height: 30px;
-    padding: 7px 10px;
+    height: 36px;
+    padding: 10px 15px;
     font-size: 14px;
     font-weight: 400;
     font-family: inherit;
@@ -174,8 +169,12 @@ body {
     width: 43%;
 }
 
+.options__cell_w_90 {
+    width: 88%;
+}
 
-.options__row_remove {
+
+.options__row-remove {
     display: inline-block;
     margin-top: 6px;
     color: #f55;
@@ -197,4 +196,16 @@ body {
 
 .options__form {
     margin-bottom: 30px;
+}
+
+
+.option__message_type_success {
+    margin-left: 15px;
+    color: #5a6;
+}
+
+
+
+.is-float-right {
+    float: right;
 }

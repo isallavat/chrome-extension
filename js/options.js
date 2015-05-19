@@ -1,6 +1,7 @@
 var app = angular.module('app', []);
 
-app.controller('Options', function ($scope, $http) {
+
+app.controller('Options', function ($scope, $timeout) {
     // Получение настройки расширения
     $scope.options = localStorage.options ? JSON.parse(localStorage.options) : {};
 
@@ -11,13 +12,20 @@ app.controller('Options', function ($scope, $http) {
      * @param {object} event
      */
     $scope.loadOptions = function (event) {
-        $http.get(event.target.value).success(function(data) {
-            console.log(data);
-        });
-        /*var file = event.target.files[0],
-            reader = new FileReader();
+        var file = event.target.files[0],
+            fr = new FileReader();
 
-        console.log(reader.readAsText(file));*/
+        fr.onload = function () {
+            try {
+                $scope.options = JSON.parse(fr.result);
+                $scope.$apply();
+            }
+            catch (e) {
+                alert('Содержимое файла не соответсвует стандарту JSON');
+            }
+        };
+
+        fr.readAsText(file);
     };
 
 
@@ -25,6 +33,7 @@ app.controller('Options', function ($scope, $http) {
      * Добавление формы
      */
     $scope.addForm = function () {
+        $scope.options.forms = $scope.options.forms || [];
         $scope.options.forms.unshift({title: '', sites: '', items: []});
     };
 
@@ -65,6 +74,15 @@ app.controller('Options', function ($scope, $http) {
      */
     $scope.save = function () {
         localStorage.options = JSON.stringify($scope.options);
+        
+        $scope.msg = {
+            type: 'success',
+            text: 'Сохранено'
+        }
+
+        $timeout(function () {
+            $scope.msg = null;
+        }, 2000);
     };
 
 

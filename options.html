@@ -11,75 +11,71 @@
 
 <body ng-controller="Options">
     <div class="options">
-        <h1 class="heading heading_1">
-            <span>Настройки</span>
-            <span class="button button_theme_blue button_type_file" style="float: right;">
-                <span>Загрузить настройки</span>
-                <input type="file">
-            </span>
-        </h1>
+        <span class="button button_theme_blue button_type_file is-float-right">
+            <span>Загрузить настройки</span>
+            <input type="file">
+        </span>
 
+        <h1 class="heading heading_1">Настройки</h1>
 
         <p><hr class="separator"></p>
 
-        <div ng-if="options.forms">
-            <h2 class="heading heading_2" style="display: inline-block;">Формы</h2>
-            <span class="link link_pseudo" style="display: inline-block; vertical-align: text-bottom; margin-left: 20px;" ng-click="addForm()">Добавить</span>
+        <h2 class="heading heading_2" style="display: inline-block;">Формы</h2>
+        <span class="link link_pseudo" style="margin-left: 20px;" ng-click="addForm()">Добавить</span>
 
-            <div class="options__form" ng-repeat="form in options.forms track by $index">
+        <div class="options__form" ng-repeat="form in options.forms track by $index">
+            <div class="options__row">
+                <div class="options__cell options__cell_w_90">
+                    <label class="options__label">Название</label>
+                    <input class="input" type="text" ng-model="form.title">
+                </div>
+                <div class="options__cell options__cell_w_10">
+                    <label class="options__label">&nbsp;</label>
+                    <span class="link link_pseudo options__row-remove" ng-click="removeForm($index)">Удалить</span>
+                </div>
+            </div>
+
+            <fieldset class="options__fieldset">
+                <legend><b>Элементы формы</b></legend>
                 <div class="options__row">
-                    <div class="options__cell options__cell_w_45">
-                        <label class="options__label">Название</label>
-                        <input class="input" type="text" ng-model="form.title">
+                    <div class="options__cell options__cell_w_30">
+                        <label class="options__label">Тип</label>
                     </div>
-                    <div class="options__cell options__cell_w_45">
-                        <label class="options__label">Сайты (через запятую)</label>
-                        <input class="input" type="text" ng-model="form.sites">
+                    <div class="options__cell options__cell_w_30">
+                        <label class="options__label">Ключ (name)</label>
                     </div>
-                    <div class="options__cell options__cell_w_10">
-                        <label class="options__label">&nbsp;</label>
-                        <span class="link link_pseudo options__row_remove" ng-click="removeForm($index)">Удалить</span>
+                    <div class="options__cell options__cell_w_30">
+                        <label class="options__label">Значение (value)</label>
                     </div>
                 </div>
 
-                <fieldset class="options__fieldset">
-                    <legend><b>Элементы формы</b></legend>
-                    <div class="options__row">
-                        <div class="options__cell options__cell_w_30">
-                            <label class="options__label">Тип</label>
-                        </div>
-                        <div class="options__cell options__cell_w_30">
-                            <label class="options__label">Ключ (name)</label>
-                        </div>
-                        <div class="options__cell options__cell_w_30">
-                            <label class="options__label">Значение (value)</label>
-                        </div>
+                <div class="options__row" ng-repeat="item in form.items track by $index">
+                    <div class="options__cell options__cell_w_30">
+                        <select class="input" ng-model="item.type">
+                            <option value="text" ng-selected="!item.type">Простой текст</option>
+                            <option value="randomText">Случайный текст</option>
+                            <option value="email">Сгенерированный E-mail</option>
+                        </select>
                     </div>
-
-                    <div class="options__row" ng-repeat="item in form.items track by $index">
-                        <div class="options__cell options__cell_w_30">
-                            <select class="input" ng-model="item.type">
-                                <option value="text" ng-selected="!item.type">Простой текст</option>
-                                <option value="randomText">Случайный текст</option>
-                                <option value="email">Сгенерированный E-mail</option>
-                            </select>
-                        </div>
-                        <div class="options__cell options__cell_w_30">
-                            <input class="input" type="text" ng-model="item.name">
-                        </div>
-                        <div class="options__cell options__cell_w_30">
-                            <input class="input" type="text" ng-model="item.value">
-                        </div>
-                        <div class="options__cell options__cell_w_10">
-                            <span class="link link_pseudo options__row_remove" ng-click="removeFormItem(form, $index)">Удалить</span>
-                        </div>
+                    <div class="options__cell options__cell_w_30">
+                        <input class="input" type="text" ng-model="item.name">
                     </div>
+                    <div class="options__cell options__cell_w_30">
+                        <input class="input" type="text" ng-model="item.value">
+                    </div>
+                    <div class="options__cell options__cell_w_10">
+                        <span class="link link_pseudo options__row-remove" ng-click="removeFormItem(form, $index)">Удалить</span>
+                    </div>
+                </div>
 
-                    <p><span class="link link_pseudo" ng-click="addFormItem(form)">Добавить</span></p>
-                </fieldset>
-            </div>
+                <p><span class="link link_pseudo" ng-click="addFormItem(form)">Добавить</span></p>
+            </fieldset>
         </div>
-        <div ng-if="options"><button class="button button_theme_blue options__save" ng-click="save()">Сохранить</button></div>
+
+        <div ng-if="options">
+            <button class="button button_theme_blue" ng-click="save()">Сохранить</button>
+            <span class="option__message option__message_type_{{ msg.type }}" ng-if="msg">{{ msg.text }}</span>
+        </div>
     </div>
 </body>
 </html>
