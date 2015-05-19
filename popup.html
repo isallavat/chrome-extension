@@ -5,20 +5,27 @@
     <meta charset="utf-8">
     <title>Whotrades</title>
     <link rel="stylesheet" href="/css/whotrades.css">
-    <script src="/js/angular.min.js"></script>
-    <script src="/js/jquery-2.1.4.min.js"></script>
-    <script src="/js/whotrades.js"></script>
+    <script src="/js/angular.js"></script>
+    <script src="/js/popup.js"></script>
 </head>
 
-<body ng-controller="Popup" class="body">
+<body ng-controller="Popup">
     <div class="popup">
-        <ul class="popup__list">
-            <li class="popup__item" data-ng-click="fillForm()">Заполнение всей формы</li>
-            <li class="popup__item" data-ng-click="fillFormFlement()">Заполнение элемента формы</li>
+        <ul class="popup__list popup__list_level_1">
+            <li class="popup__item">
+                <div class="popup__item-caption" ng-click="toggleSubmenu($event)">Заполнить форму</div>
+                <ul class="popup__list popup__list_level_2">
+                    <li class="popup__item" ng-repeat="form in options.forms track by $index" ng-if="checkSite(form.sites)">
+                        <div class="popup__item-caption" ng-click="fillForm(form)">{{ form.title }}</div>
+                    </li>
+                </ul>
+            </li>
         </ul>
         <hr class="separator">
         <ul class="popup__list">
-            <li class="popup__item" data-ng-click="getOptions()">Настройки</li>
+            <li class="popup__item" ng-click="getOptions()">
+                <div class="popup__item-caption">Настройки</div>
+            </li>
         </ul>
     </div>
 </body>

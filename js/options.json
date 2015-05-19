@@ -1,0 +1,72 @@
+{
+    "forms": [
+        {
+            "title": "Регистрация",
+            "sites": "whotrades.com, whotrades.net",
+            "items": [
+                {
+                    "type": "text",
+                    "name": "user['name']",
+                    "value": "Имя"
+                },
+                {
+                    "type": "text",
+                    "name": "user[lastname]",
+                    "value": "Фамилия"
+                },
+                {
+                    "type": "email",
+                    "name": "user[email]",
+                    "value": "sd@whotrades.org"
+                },
+                {
+                    "type": "text",
+                    "name": "user[password]",
+                    "value": "123456789"
+                },
+                {
+                    "type": "text",
+                    "name": "user[password2]",
+                    "value": "123456789"
+                },
+                {
+                    "type": "text",
+                    "name": "mobile_phone[full]",
+                    "value": "+71234567890"
+                }
+            ]
+        },
+        {
+            "title": "Вход",
+            "sites": "whotrades.com, whotrades.net",
+            "items": [
+                {
+                    "type": "text",
+                    "name": "auth[login]",
+                    "value": "sd@whotrades.org"
+                },
+                {
+                    "type": "text",
+                    "name": "auth[password]",
+                    "value": "123456789"
+                }
+            ]
+        },
+        {
+            "title": "Блог-пост",
+            "sites": "whotrades.com, whotrades.net",
+            "items": [
+                {
+                    "type": "randomText",
+                    "name": "post[title]",
+                    "value": "30"
+                },
+                {
+                    "type": "randomText",
+                    "name": "post[text]",
+                    "value": "200"
+                }
+            ]
+        }
+    ]
+}

@@ -1,13 +1,14 @@
 {
     "manifest_version": 2,
     "name": "Whotrades",
-    "version": "1.0",
+    "version": "0.0.1",
     "description": "Hubble pictures extension",
     "author": "Salavat Dautov",
 
 
     "permissions": [
         "tabs",
+        "activeTab",
         "contextMenus",
         "http://*/*",
         "https://*/*"
@@ -18,15 +19,6 @@
         "default_icon": "img/icon.png",
         "default_popup": "popup.html"
     },
-
-    "content_scripts": [{
-        "matches": ["http://*/*","https://*/*"],
-        "js": [
-            "/js/angular.min.js",
-            "/js/jquery-2.1.4.min.js",
-            "/js/whotrades.js"
-        ]
-    }],
 
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
 
