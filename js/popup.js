@@ -1,13 +1,10 @@
-var app = angular.module('app', []);
-
-chrome.tabs.executeScript({file: '/js/jquery.js'});
-
-
-app.controller('Popup', function ($scope, $http) {
-    // Получение настройки расширения
-    $scope.options = localStorage.options ? JSON.parse(localStorage.options) : {};
+chrome.tabs.query({active: true}, function (tab) {
+    window.activeTab = tab[0];
+    chrome.tabs.executeScript(window.activeTab.id, {file: '/js/jquery.js'});
+});
 
 
+app.controller('Popup', function ($scope, $rootScope) {
     /**
      * Выполнение скриптов для активной вкладки
      *
@@ -15,20 +12,12 @@ app.controller('Popup', function ($scope, $http) {
      * @param {object} param
      */
     $scope.exec = function (action, param) {
-        chrome.tabs.executeScript({
+        chrome.tabs.executeScript(window.activeTab.id, {
             code: 'var action = "' + action + '", params = ' + JSON.stringify(param)
         }, function () {
-            chrome.tabs.executeScript({file: '/js/exec.js'});
+            chrome.tabs.executeScript(window.activeTab.id, {file: '/js/exec.js'});
             window.close();
         });
-    };
-
-
-    /**
-     * Открытие вкладки с настройками
-     */
-    $scope.getOptions = function () {
-        chrome.runtime.openOptionsPage();
     };
 
 
@@ -84,18 +73,26 @@ app.controller('Popup', function ($scope, $http) {
      * @returns {string}
      */
     $scope.generateText = function (value) {
-        var xhr = new XMLHttpRequest(),
+        /*var xhr = new XMLHttpRequest(),
             _value = value.split(':'),
-            host = 'https://montanaflynn-lorem-text-generator.p.mashape.com/',
+            url = 'http://referats.yandex.ru/referats/?t=marketing',
             response;
 
-        xhr.open('GET', host + _value[0] + '?count=' + _value[1], false);
-        xhr.setRequestHeader('X-Mashape-Key', 'M9cAROt2eNmshJMy3feYN5u2V1YSp1Qa5iMjsnLV0ZYQSfB9rC');
-        xhr.setRequestHeader('Accept', 'application/json');
+        xhr.open('GET', url, false);
         xhr.send();
 
-        response = JSON.parse(xhr.responseText);
+        $scope.yaReferatsTextAsObject(xhr.responseText);*/
 
-        return response.join(' ');
+        return value;
+    };
+
+
+    $scope.yaReferatsTextAsObject = function (html) {
+        var div = document.createElement('div'),
+            text = {};
+
+        div.innerHTML = html;
+        //text.paragraphs = div.querySelectorAll('.referats__text p')
+        alert(div.querySelector('.referats__text p').innerHTML);
     };
 });

@@ -1,27 +1,21 @@
-var app = angular.module('app', []);
-
-
-app.controller('Options', function ($scope, $timeout) {
-    // Получение настройки расширения
-    $scope.options = localStorage.options ? JSON.parse(localStorage.options) : {};
-
-
+app.controller('Options', function ($scope, $rootScope, $timeout) {
     /**
      * Загрузка файла настроек
      *
      * @param {object} event
      */
-    $scope.loadOptions = function (event) {
+    $scope.uploadOptions = function (event) {
         var file = event.target.files[0],
             fr = new FileReader();
 
         fr.onload = function () {
             try {
-                $scope.options = JSON.parse(fr.result);
-                $scope.$apply();
+                $rootScope.options = JSON.parse(fr.result);
+                $rootScope.$apply();
+                $scope.save();
             }
             catch (e) {
-                alert('Содержимое файла не соответсвует стандарту JSON');
+                alert(chrome.i18n.getMessage('fileIsNotJSON'));
             }
         };
 
@@ -33,8 +27,8 @@ app.controller('Options', function ($scope, $timeout) {
      * Добавление формы
      */
     $scope.addForm = function () {
-        $scope.options.forms = $scope.options.forms || [];
-        $scope.options.forms.unshift({title: '', sites: '', items: []});
+        $rootScope.options.forms = $rootScope.options.forms || [];
+        $rootScope.options.forms.unshift({title: '', sites: '', items: []});
     };
 
 
@@ -44,7 +38,7 @@ app.controller('Options', function ($scope, $timeout) {
      * @param {number} index
      */
     $scope.removeForm = function (index) {
-        $scope.options.forms.splice(index, 1);
+        $rootScope.options.forms.splice(index, 1);
     };
 
 
@@ -73,12 +67,12 @@ app.controller('Options', function ($scope, $timeout) {
      * Сохранение настроек
      */
     $scope.save = function () {
-        localStorage.options = JSON.stringify($scope.options);
+        localStorage.options = JSON.stringify($rootScope.options);
         
         $scope.msg = {
             type: 'success',
-            text: 'Сохранено'
-        }
+            text: chrome.i18n.getMessage('saved')
+        };
 
         $timeout(function () {
             $scope.msg = null;
@@ -86,5 +80,5 @@ app.controller('Options', function ($scope, $timeout) {
     };
 
 
-    angular.element(document.querySelector('[type="file"]')).on('change', $scope.loadOptions);
+    angular.element(document.querySelector('[type="file"]')).on('change', $scope.uploadOptions);
 });

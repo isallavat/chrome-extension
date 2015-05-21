@@ -1,0 +1,53 @@
+{
+    "fileIsNotJSON": {
+        "message": "Содержимое файла не соответсвует стандарту JSON"
+    },
+    "add": {
+        "message": "Добавить"
+    },
+    "remove": {
+        "message": "Удалить"
+    },
+    "save": {
+        "message": "Сохранить"
+    },
+    "saved": {
+        "message": "Сохранено"
+    },
+    "type": {
+        "message": "Тип"
+    },
+    "key": {
+        "message": "Ключ"
+    },
+    "value": {
+        "message": "Значение"
+    },
+    "title": {
+        "message": "Название"
+    },
+    "forms": {
+        "message": "Формы"
+    },
+    "formElements": {
+        "message": "Элементы формы"
+    },
+    "fillForm": {
+        "message": "Заполнить форму"
+    },
+    "options": {
+        "message": "Настройки"
+    },
+    "uploadOptions": {
+        "message": "Загрузить настройки"
+    },
+    "plainText": {
+        "message": "Простой текст"
+    },
+    "randomText": {
+        "message": "Случайный текст"
+    },
+    "generatedEmail": {
+        "message": "Сгенерированный E-mail"
+    }
+}

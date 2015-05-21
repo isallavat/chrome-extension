@@ -4,27 +4,22 @@
 <head>
     <meta charset="utf-8">
     <title>Whotrades</title>
-    <link rel="stylesheet" href="/css/whotrades.css">
+    <link rel="stylesheet" href="/css/common.css">
     <script src="/js/angular.js"></script>
+    <script src="/js/common.js"></script>
     <script src="/js/popup.js"></script>
 </head>
 
 <body ng-controller="Popup">
     <div class="popup">
-        <ul class="popup__list popup__list_level_1">
+        <ul class="popup__list popup__list_level_1" ng-if="options.forms">
             <li class="popup__item">
-                <div class="popup__item-caption" ng-click="toggleSubmenu($event)">Заполнить форму</div>
+                <div class="popup__item-caption" ng-click="toggleSubmenu($event)">{{ i18n('fillForm') }}</div>
                 <ul class="popup__list popup__list_level_2">
                     <li class="popup__item" ng-repeat="form in options.forms track by $index">
                         <div class="popup__item-caption" ng-click="fillForm(form)">{{ form.title }}</div>
                     </li>
                 </ul>
-            </li>
-        </ul>
-        <hr class="separator">
-        <ul class="popup__list">
-            <li class="popup__item" ng-click="getOptions()">
-                <div class="popup__item-caption">Настройки</div>
             </li>
         </ul>
     </div>
